@@ -2,8 +2,8 @@
 #-*- coding:utf-8 -*-
 
 class Student(object):
-
-	def __init__(self,name,score):
+	
+	def __init__(self,name='',score=0):
 		self.__name=name
 		self.__score=score
 
@@ -32,9 +32,23 @@ class Student(object):
 			return 'B'
 		else:
 			return 'C'
+    #defined the 'str'
+	def __str__(self):
+		return 'Student object(name:%s)'%self.__name
 
-bart=Student('Bart Simpson',59)
-lisa=Student('Lisa Simpson',87)
-bart.print_score()
-lisa.print_score()
-print(lisa.get_grade())
+	# defined 'getattr'
+	def __getattr__(self, attr):
+		if attr == 'age':
+			return lambda: 25
+		# raise AttributeError('\'Student\' object has no attribute \'%s\'' % attr)
+		# raise AttributeError('\'Student\' object has-- no attribute \'%s\'' % attr)
+
+    # define a callable class
+	def __call__(self):
+		print('My name is %s' % self.__name)
+
+
+	__repr__ = __str__
+
+
+
